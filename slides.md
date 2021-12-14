@@ -46,8 +46,8 @@ If you don't have these libraries installed already, you can start doing that no
 ```r
 library(usethis) # for nice interactions with Git/Github
 library(gitcreds) # for functions that help set up a PAT
-library(gert)
 library(credentials)
+library(gert)
 library(gh)
 ```
 
@@ -62,43 +62,36 @@ I may not need to tell you this, but choose a "nice" username. Something that yo
 
 ## Getting set up - Install & configure Git
 
-Check to see if you already have Git installed by typing the following in the shell/terminal.
+Check to see if you already have Git installed by typing `which git`  in the shell/terminal.
 
-    ```
-    which git
-    ```
+If this returns something like `/usr/bin/git` then you are finished and don't need to install Git. On a Windows machine, you may not even be able to type the `which git` command successfully. 
     
-    If this returns something like
-    
-    ```
-    /usr/bin/git
-    ```
-    
-    then you are finished and don't need to install Git. On a Windows machine,     you may not even be able to type the `which git` command successfully. 
-    
-    ![](images/0_which_git.png)
+![Figure: Results of running which git in the terminal on my computer](images/0_which_git.png)
 
 ## Getting set up - Install Git (if need be)
+
+<div class="columns-2">
 
 **On a Windows:**
 
   * Install [Git for Windows](https://gitforwindows.org/). When asked about “Adjusting your PATH environment”, make sure to select “Git from the command line and also from 3rd-party software”.  
   * R Studio for Windows prefers for Git to be installed below C:/Program Files and this appears to be the default. Unless you have specific reasons to otherwise, follow this convention.
   
+
+\
+\
+\
+
 **On a Mac:**
 
-  * Go to the *shell/terminal* and enter **one** of these commands to elicit an offer to install developer command line tools. Accept the offer ... click on install.
+  * Enter either `git --version` OR `git config` in the terminal/shell to elicit an offer to install developer command line tools. Accept the offer ... click on install.
   
-    ```
-    git --version
-    git config
-    ```
-
   * Some of you on a Mac may need to do the following in the *terminal* if you try to open a project unsuccessfully. You'll find out if this is the case in a moment.
   
     ```
     xcode-select --install
     ```
+</div>
 
 ## Getting set up - Configure Git
 
@@ -113,7 +106,7 @@ use_git_config(user.name = "Jane Doe", user.email = "jane@example.org")
 A PAT, or Personal Access Token, is now necessary in order for RStudio and GitHub to talk to one another.
 
 1. Run the `create_github_token()` function from the `usethis` library in the console. This will take you to the GitHub website where you can create a token - store that somewhere safe and don't lose it! You'll need it in a moment and maybe sometime in the distant future.  
-2. Install the `gitcreds` package in RStudio and load the library using `library(gitcreds)` (you can do that in the console).  
+2. Install the `gitcreds` package in RStudio and load the library in the console.  
 3. Run the `gitcreds_set()` function in the console. If you are given options, choose the option to Replace these credentials and then paste in your PAT that you just created in the previous step.  
 4. When you next commit and push, it may still ask you for your github username and password, **use your PAT when it asks for your password!!** (we'll get to committing and pushing in a moment).
 
@@ -126,27 +119,30 @@ Find detailed images of this process [here](https://github.com/llendway/github_f
 
 2. Click on the "New" button. Name your repository. Choose Public and check the box next to Add a README filend probably add a license (I usually choose MIT but do not trust me to explain any of the legality of this). Then click Create repository.
 
-3. Clone the repo to your computer: click the green code button and copy the link, in R Studio File --> New Project --> Version Control --> Git --> Paste link and put it in the desired location. Click Create Project. This will open a new RStudio session. You should now see a Git tab (in upper right-hand corner by default) and there should be a .Rproj file and .gitignore file there.
+3. Clone the repo by clicking the green code button and copying the link. In R Studio, do File --> New Project --> Version Control --> Git --> Paste the link you copied and put it in the desired location. Click Create Project. This will open a new RStudio session. You should now see a Git tab (in upper right-hand corner by default) and there should be a .Rproj file and .gitignore file there.
 
 We will do these steps together!
 
+<div class="notes">
+Think of cloning a repo as "copying" the repository to your computer. But when it does the copying, it keeps the connection with the online repo. As we make changes to the files in our project on our computer, we can also make sure those changes are saved out to Github. </div>
+
+
 ## Commit and Push
 
-Think of cloning a repo as "copying" the repository to your computer. But when it does the copying, it keeps the connection with the online repo. As we make changes to the files in our project on our computer, we can also make sure those changes are saved out to Github. Let's see how to do this. 
-
-1. Open the README file and make a small change. You could just add a sentence. 
+1. Open the README file and make a small change.  
 2. Save the file and you should see it show up in the Git tab. That means this file has been saved locally but the save hasn't been "documented" in Git or Github. 
-3. Click the Commit button in the Git tab. Put a check in the box next to the README.md file under the word *Staged* (in the future, you can stage multiple files at the same time by checking the boxes next to multiple files) and **add a comment to the commit box**. Click commit. It will give you a message saying it is complete. The message may seem cryptic if you're not used to them. The change you made has now been committed to local memory, in the Git history (Click the Diff button in the Git tab and you can see the history of your commits). The changed file is only change on your computer, NOT online if you look at GitHub ... go check.  
-4. Next, we are going to push those changes to GitHub by clicking the green up arrow in the Git tab. 
+3. Click the Commit button in the Git tab. Put a check in the box next to the README.md file under the word *Staged* (you can stage multiple files at the same time by checking the boxes next to multiple files) and **add a comment to the commit box**. Click commit. It will give you a somewhat cryptic message saying it is complete. The change you made has now been committed to local memory, in the Git history (Click the Diff button in the Git tab and you can see the history of your commits). The changed file is only change on your computer, NOT on Github.  
+4. Push those changes to GitHub by clicking the green up arrow in the Git tab. After it pushes, refresh your Github repo online and you should see the changes reflected.  
 
-
+<div class="notes">
 Were you prompted for a username and password? Try making another modification, committing, and pushing. Are you still prompted for a username and password? If so, go back and make sure you set up a Personal Access Token (PAT) and use that as the password. 
-
+</div>
 
 ## Your turn!
 
 1. Create a new .Rmd file and save it to your project folder/repository.  
 2. Stage, commit, and push the new file to Github. Check out on Github to make sure everything you think should be out there is out there. 
+3. Make a few more small changes. Stage, commit, and push each change you make. 
 
 
 ## Using the terminal ... queue scary music
@@ -299,21 +295,25 @@ Let's do it!
 
 We're going to make pull requests to a PR practice repo I created: https://github.com/llendway/pr_practice
 
+## When you can't figure out the right Git/Github ...
+
+<div class="columns-2">
+
+BURN IT ALL DOWN! No, really, you don't have to feel badly using this as a strategy. https://happygitwithr.com/burn.html
+
+![](https://imgs.xkcd.com/comics/git.png)
+
+</div>
+
 ## Resources
 
-David Keyes's setting up Git/Github blog post: https://rfortherestofus.com/2021/02/how-to-use-git-github-with-r/
-
-Setting up Git/Github and using it for collaboration: https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md
-
-Slides from my R Ladies Tunis talk: https://github.com/llendway/rladies_github_for_collab
-
-My blog post, with video (thank you to my sister, Heather): https://lisalendway.netlify.app/posts/2021-02-24-gitinrstudio/
-
-Happy Git with R by Jenny Bryan: https://happygitwithr.com/ - an amazing resource, especially after you're a little more comfortable with using Git and Github
-
-The usethis Pull request helpers article: https://usethis.r-lib.org/articles/articles/pr-functions.html
-
-Melanie Frazier's Guide, *GitHub: A beginner's guide to going back in time (aka fixing mistakes)*: https://ohi-science.org/news/github-going-back-in-time
+* David Keyes's setting up Git/Github blog post: https://rfortherestofus.com/2021/02/how-to-use-git-github-with-r/  
+* Setting up Git/Github and using it for collaboration: https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md  
+* Slides from my R Ladies Tunis talk: https://github.com/llendway/rladies_github_for_collab  
+* My blog post, with video (thank you to my sister, Heather): https://lisalendway.netlify.app/posts/2021-02-24-gitinrstudio/  
+* Happy Git with R by Jenny Bryan: https://happygitwithr.com/ - an amazing resource, especially after you're a little more comfortable with using Git and Github  
+* The usethis Pull request helpers article: https://usethis.r-lib.org/articles/articles/pr-functions.html  
+* Melanie Frazier's Guide, *GitHub: A beginner's guide to going back in time (aka fixing mistakes)*: https://ohi-science.org/news/github-going-back-in-time
 
 
 
