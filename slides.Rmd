@@ -61,51 +61,47 @@ Created an account on https://github.com/.
 I may not need to tell you this, but choose a "nice" username. Something that you often use and that incorporates part of your name. Definitely something you will be ok revealing to a future boss. 
 
 
-## Getting set up - Install Git
+## Getting set up - Install & configure Git
 
-Install and configure git  
+Check to see if you already have Git installed by typing the following in the shell/terminal.
 
-  1. Check to see if you already have Git installed by typing the following in the shell/terminal.
+    ```
+    which git
+    ```
+    
+    If this returns something like
+    
+    ```
+    /usr/bin/git
+    ```
+    
+    then you are finished and don't need to install Git. On a Windows machine,     you may not even be able to type the `which git` command successfully. 
+    
+    ![](images/0_which_git.png)
 
-```
-which git
-```
+## Getting set up - Install Git (if need be)
 
-If this returns something like
-
-```
-/usr/bin/git
-```
-
-then you are finished and don't need to install Git. On a Windows machine, you may not even be able to type the `which git` command successfully. 
-
-![](images/0_which_git.png)
-
-## Getting set up - Install Git
-
-  2. Install Git (if you don't have it)
-
-  **On a Windows:**
+**On a Windows:**
 
   * Install [Git for Windows](https://gitforwindows.org/). When asked about “Adjusting your PATH environment”, make sure to select “Git from the command line and also from 3rd-party software”.  
   * R Studio for Windows prefers for Git to be installed below C:/Program Files and this appears to be the default. Unless you have specific reasons to otherwise, follow this convention.
   
-  **On a Mac:**
+**On a Mac:**
 
   * Go to the *shell/terminal* and enter **one** of these commands to elicit an offer to install developer command line tools. Accept the offer ... click on install.
   
-```
-git --version
-git config
-```
+    ```
+    git --version
+    git config
+    ```
 
   * Some of you on a Mac may need to do the following in the *terminal* if you try to open a project unsuccessfully. You'll find out if this is the case in a moment.
   
-```
-xcode-select --install
-```
+    ```
+    xcode-select --install
+    ```
 
-## Configure Git
+## Getting set up - Configure Git
 
 If you haven't already, you'll need to install the `usethis` library and load it. Run the following code in the *console* with some minor changes. The `user.name` is your Git username. This can be different from your GitHub username, although it might be a good idea to just keep it the same. The `user.email` *MUST* be the same as your GitHub user email. 
 
@@ -123,16 +119,64 @@ A PAT, or Personal Access Token, is now necessary in order for RStudio and GitHu
 4. When you next commit and push, it may still ask you for your github username and password, **use your PAT when it asks for your password!!** (we'll get to committing and pushing in a moment).
 
 
-## Review of the Git/Github with R Project basics 
+## Create and clone a repo! 
 
-For images and more detail, see: https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md
+Find detailed images of this process [here](https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md).
 
-1. Create repo on https://github.com/, checking the box to add a README and probably add a license (I usually choose MIT but do not trust me to explain any of the legality of this).  
-2. Clone the repo to your computer: click the green code button and copy the link, in R Studio File --> New Project --> Version Control --> Git --> Paste link and put it in the desired location.  
-3. Stage, Commit, and Push the .Rproj file.  
-4. Add a new .Rmd file and stage, commit, and push that.
+1. Create a repo on https://github.com/. After you login, you should see a little icon in the upper right-hand corner. Mine is an image of me. If I click on that a drop-down appears and I can choose "Your repositories". Do that.
+
+2. Click on the "New" button. Name your repository. Choose Public and check the box next to Add a README filend probably add a license (I usually choose MIT but do not trust me to explain any of the legality of this). Then click Create repository.
+
+3. Clone the repo to your computer: click the green code button and copy the link, in R Studio File --> New Project --> Version Control --> Git --> Paste link and put it in the desired location. Click Create Project. This will open a new RStudio session. You should now see a Git tab (in upper right-hand corner by default) and there should be a .Rproj file and .gitignore file there.
 
 We will do these steps together!
+
+## Commit and Push
+
+Think of cloning a repo as "copying" the repository to your computer. But when it does the copying, it keeps the connection with the online repo. As we make changes to the files in our project on our computer, we can also make sure those changes are saved out to Github. Let's see how to do this. 
+
+1. Open the README file and make a small change. You could just add a sentence. 
+2. Save the file and you should see it show up in the Git tab. That means this file has been saved locally but the save hasn't been "documented" in Git or Github. 
+3. Click the Commit button in the Git tab. Put a check in the box next to the README.md file under the word *Staged* (in the future, you can stage multiple files at the same time by checking the boxes next to multiple files) and **add a comment to the commit box**. Click commit. It will give you a message saying it is complete. The message may seem cryptic if you're not used to them. The change you made has now been committed to local memory, in the Git history (Click the Diff button in the Git tab and you can see the history of your commits). The changed file is only change on your computer, NOT online if you look at GitHub ... go check.  
+4. Next, we are going to push those changes to GitHub by clicking the green up arrow in the Git tab. 
+
+
+Were you prompted for a username and password? Try making another modification, committing, and pushing. Are you still prompted for a username and password? If so, go back and make sure you set up a Personal Access Token (PAT) and use that as the password. 
+
+
+## Your turn!
+
+1. Create a new .Rmd file and save it to your project folder/repository.  
+2. Stage, commit, and push the new file to Github. Check out on Github to make sure everything you think should be out there is out there. 
+
+
+## Using the terminal ... queue scary music
+
+I don't like the terminal, but sometimes I'm forced to use it. When I have to do that, my palms get sweaty, and I sometimes close my eyes and peak through my fingers after hitting return while I wait in fear to see what sort of mistake I might have made. I've learned a few Git commands that I feel comfortable enough to share.
+
+There's a video of me doing these same things here: https://lisalendway.netlify.app/posts/2021-02-24-gitinrstudio/#i-use-the-terminal-and-come-out-alive
+
+## Using the terminal
+
+This first one doesn't actually require the terminal (yay!).
+
+You save a file, but don't want those changes. You can right-click on the file in the Git tab and choose revert. You can also choose diff to see how it has changed from its last version. This will change the file back to the previous commit. So, if you've saved a lot and not committed, that could be a lot of changes.
+
+## Using the terminal
+
+You committed something you didn't actually want to commit. Or maybe you committed something that's too large to push to Github (that's usually my mistake). So, I need to "un-commit", which means heading to the terminal. In the terminal, run `git reset HEAD~1` which will bring back all the files you just committed as if they were never committed - you may need to refresh the Git pane. 
+
+Then, you can make the changes you want, even deleting a file, and re-commit.
+
+## Using the terminal
+
+This time you committed and pushed. You may have made additional commits that you DO NOT CARE ABOUT. To revert to an old commit, use `git revert --no-commit <SHA>..HEAD` in the terminal, where `<SHA>` is the alpha numeric string that defines that commit. You can find the `<SHA>` in the history (the clock icon) in the Git tab.
+
+## Using the terminal
+
+This time you committed something, pushed it, and made more commits along the way.
+
+We can go back to a previous commit and keep our new commits by using `git revert <SHA>` in the terminal. This will likely lead to a merge conflict (which you can resolve in RStudio) or put you in the VIM window (I don't even know what that means) where you should push `:q` as quickly as possible to escape.
 
 ## Adding a collaborator
 
@@ -167,108 +211,6 @@ When that happens, you need to resolve it by editing the file where the merge co
 
 Let's create a merge conflict together!
 
-## Branching
-
-According to Github [documents](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches) (which I probably should read more of), "Branches allow you to develop features, fix bugs, or safely experiment with new ideas in a contained area of your repository." 
-
-You can experiment in a branch and then later merge it with your "main" branch (or with another branch). 
-
-This can be a safer way to collaborate with others.
-
-
-## Branching
-
-Let's add a branch (we'll do this together in a moment).
-
-Click on the "branch" in the Git tab.  
-
-
-![](images/branch.png){width="50%"}
-
-
-
-## Branching
-
-Give it a name and create. You'll see this after you do. 
-
-![](images/branch_created.png){width="50%"}
-
-You can also see the new branch on Github. Let's do these steps together.
-
-## Branching
-
-Now that we have a branch, let's use it. Make a change to a file in the new branch (we'll just use the README). Commit and push the changed file. On Github, you'll see a message like this:
-
-![](images/branch_compare_pr.png){width="90%"}
-
-If I'm collaborating, the collaborator can pull in changes to see the new branch. 
-
-Let's do this together. Make a few commits and pushes.
-
-
-## Branching - merging to main
-
-Once we are satisfied with the work we did in our branch, we'll want to merge it back to the main branch. Go out to Github and click on the Compare & pull request button in the new branch. This is creating a pull request - asking someone (in this case yourself) to pull in the changes you're about to merge. Fill in the fields and click Create pull request.
-
-![](images/branch_pr.png){width="50%"}
-
-## Branching - merging to main
-
-I could keep making changes, committing, and pushing. If I'm finished, and since I didn't make any difficult changes, it can be merged automatically - this won't always be the case.
-
-![](images/branch_merge.png){width="90%"}
-
-Click Merge pull request.
-
-## Branching - merging to main w/ conflict
-
-What if I (or my collaborator) made changes to the same file in the main branch, while I was making changes to it in the new branch? We'll have a merge conflict to resolve! Let's see those steps. First, we each make our changes and save, commit, and push.
-
-<div class="columns-2">
-![Change in new branch](images/1_change_in_new_branch.png){width="90%"}
-
-![Change in main branch](images/2_change_in_main_branch.png){width="90%"}
-
-</div>
-
-
-## Branching - merging to main w/ conflict
-
-In Github, click on the Compare & pull request button. This time, you'll see a screen like this - notice the red X message. Still click create pull request.
-
-![](images/3_no_auto_merge.png){width="70%"}
-
-## Branching - merging to main w/ conflict
-
-On this screen, you can click the Resolve conflict button.
-
-![](images/4_resolve_conflict.png){width="70%"}
-
-## Branching - merging to main w/ conflict
-
-An editor will open where you can make changes ... in this case, it's pretty easy to do it here, but I imagine this could get pretty complicated. I guess that's a good reason to do small steps in the branches so you don't run into those :)
-
-![](images/5_conflict_editor.png){width="70%"}
-
-## Branching - merging to main w/ conflict
-
-Resolve the conflict and click Mark as resolved. Now you should be able to merge pull request as before and follow to the next steps as if you didn't have a merge conflict!
-
-![](images/6_conflict_resolved.png){width="70%"}
-
-## Branching - merging to main
-
-Confirm that you really do want to merge the new branch with the main branch.
-
-![](images/branch_confirm_merge.png){width="90%"}
-
-## Branching - merging to main
-
-If you don't need the branch anymore, you can delete it. 
-
-![](images/branch_delete.png){width="90%"}
-
-Then, go back to R Studio and pull in the changes, from the main branch.Note that it still shows up in R Studio so be careful you don't do work there (I can't figure out how to get rid of it).
 
 ## Pull requests (PRs)
 
@@ -355,38 +297,13 @@ Let's do it!
 
 We're going to make pull requests to a PR practice repo I created: https://github.com/llendway/pr_practice
 
-## Using the terminal ... queue scary music
-
-I don't like the terminal, but sometimes I'm forced to use it. When I have to do that, my palms get sweaty, and I sometimes close my eyes and peak through my fingers after hitting return while I wait in fear to see what sort of mistake I might have made. I've learned a few Git commands that I feel comfortable enough to share.
-
-There's a video of me doing these same things here: https://lisalendway.netlify.app/posts/2021-02-24-gitinrstudio/#i-use-the-terminal-and-come-out-alive
-
-## Using the terminal
-
-This first one doesn't actually require the terminal (yay!).
-
-You save a file, but don't want those changes. You can right-click on the file in the Git tab and choose revert. You can also choose diff to see how it has changed from its last version. This will change the file back to the previous commit. So, if you've saved a lot and not committed, that could be a lot of changes.
-
-## Using the terminal
-
-You committed something you didn't actually want to commit. Or maybe you committed something that's too large to push to Github (that's usually my mistake). So, I need to "un-commit", which means heading to the terminal. In the terminal, run `git reset HEAD~1` which will bring back all the files you just committed as if they were never committed - you may need to refresh the Git pane. 
-
-Then, you can make the changes you want, even deleting a file, and re-commit.
-
-## Using the terminal
-
-This time you committed and pushed. You may have made additional commits that you DO NOT CARE ABOUT. To revert to an old commit, use `git revert --no-commit <SHA>..HEAD` in the terminal, where `<SHA>` is the alpha numeric string that defines that commit. You can find the `<SHA>` in the history (the clock icon) in the Git tab.
-
-## Using the terminal
-
-This time you committed something, pushed it, and made more commits along the way.
-
-We can go back to a previous commit and keep our new commits by using `git revert <SHA>` in the terminal. This will likely lead to a merge conflict (which you can resolve in RStudio) or put you in the VIM window (I don't even know what that means) where you should push `:q` as quickly as possible to escape.
-
-
 ## Resources
 
-These slides: https://github.com/llendway/rladies_github_for_collab
+David Keyes's setting up Git/Github blog post: https://rfortherestofus.com/2021/02/how-to-use-git-github-with-r/
+
+Setting up Git/Github and using it for collaboration: https://github.com/llendway/github_for_collaboration/blob/master/github_for_collaboration.md
+
+Slides from my R Ladies Tunis talk: https://github.com/llendway/rladies_github_for_collab
 
 My blog post, with video (thank you to my sister, Heather): https://lisalendway.netlify.app/posts/2021-02-24-gitinrstudio/
 
