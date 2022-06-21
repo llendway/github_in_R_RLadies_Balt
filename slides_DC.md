@@ -9,9 +9,7 @@ output:
     df_print: paged
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 
 ## WARNING!!!
 
@@ -44,7 +42,8 @@ I hope to give you a comfortable format to try things and learn. Please, ask que
 
 If you don't have these libraries installed already, you can start doing that now. You will definitely need the first 2 libraries. The others may not be necessary.
 
-```{r, message=FALSE}
+
+```r
 library(usethis) # for nice interactions with Git/Github
 library(gitcreds) # for functions that help set up a PAT
 library(credentials)
@@ -220,7 +219,8 @@ And we're going to make pull requests to a PR practice repo I created: https://g
 
 We will need to load the usethis library. You should also have the gert, credentials, and gh packages installed. (If anyone gets an error like this: "Error in validate_gh_pat(new_gh_pat(x)) : A GitHub PAT must consist of 40 hexadecimal digits", update the gh package or reinstall, see [this post](https://community.rstudio.com/t/usethis-use-github-error-in-validate-gh-pat/105737)).
 
-```{r}
+
+```r
 library(usethis)
 ```
 
@@ -229,7 +229,8 @@ library(usethis)
 
 You are going to fork and clone the repo. Forking is putting it in your own Github repo and cloning it puts it on your computer. This function also sets the upstream remote to the original repo. This example uses my "other" GitHub account, which is pretty much a garbage account for me to practice with. 
 
-```{r, eval=FALSE}
+
+```r
 create_from_github("proflendway/test_pr")
 ```
 
@@ -245,7 +246,8 @@ After you run the code, you will see something like this, and I new RStudio wind
 
 Next, we create a branch so changes we make take place outside of the main branch. In the `pr_init()` function, name your branch. Do this in the project that was just opened - you may need to reload the usethis library first.
 
-```{r, eval=FALSE}
+
+```r
 pr_init(branch = "expand_readme")
 ```
 
