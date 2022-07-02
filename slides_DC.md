@@ -1,6 +1,6 @@
 ---
 title: "Using Git and Github in RStudio"
-subtitle: "A Hands-on Session with R Ladies Baltimore"
+subtitle: "A Hands-on Session with R Ladies DC"
 author: "Lisa Lendway, PhD"
 output: 
   ioslides_presentation:
@@ -64,7 +64,7 @@ I may not need to tell you this, but choose a "nice" username. Something that yo
 
 Check to see if you already have Git installed by typing `which git`  in the shell/terminal.
 
-If this returns something like `/usr/bin/git` then you are finished and don't need to install Git. On a Windows machine, you may not even be able to type the `which git` command successfully. 
+If this returns something like `/usr/bin/git` then you are finished and don't need to install Git. On a Windows machine, you may not even be able to type the `which git` command successfully (try `where git` instead). 
     
 ![Figure: Results of running which git in the terminal on my computer](images/0_which_git.png)
 
